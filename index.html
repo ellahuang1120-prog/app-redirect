@@ -1,34 +1,127 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>App Download</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alphamed Health Download</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f9;
+      margin: 0;
+      text-align: center;
+      color: #333;
+    }
+
+    .box {
+      max-width: 420px;
+      margin: 80px auto;
+      background: #fff;
+      padding: 28px 20px;
+      border-radius: 14px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    }
+
+    h1 {
+      font-size: 22px;
+      margin-bottom: 8px;
+    }
+
+    p {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 20px;
+    }
+
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 14px;
+      margin: 10px 0;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: bold;
+    }
+
+    .apk {
+      background: #2d7ef7;
+      color: white;
+    }
+
+    .ios {
+      background: #000;
+      color: white;
+    }
+
+    .google {
+      background: #34a853;
+      color: white;
+    }
+
+    .small {
+      font-size: 12px;
+      color: #999;
+      margin-top: 14px;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
 
   <script>
-    function redirect() {
+    function detect() {
       var ua = navigator.userAgent;
 
-      // iOS（iPhone / iPad）
-      if (/iPhone|iPad|iPod/i.test(ua)) {
-        window.location.href = "https://apps.apple.com/us/app/alphamed-health/id6758136792";
-      }
+      var isIOS = /iPhone|iPad|iPod/i.test(ua);
+      var isAndroid = /Android/i.test(ua);
 
-      // Android
-      else if (/Android/i.test(ua)) {
-        window.location.href = "https://play.google.com/store/search?q=alphamed+health&c=apps";
-      }
-
-      // PC / 其他设备 → APK
+      if (isIOS) {
+        document.getElementById("ios").classList.remove("hidden");
+      } 
+      else if (isAndroid) {
+        document.getElementById("apk").classList.remove("hidden");
+        document.getElementById("google").classList.remove("hidden");
+      } 
       else {
-        window.location.href = "https://www.pgyer.com/alphamedhealth-android-5";
+        document.getElementById("apk").classList.remove("hidden");
       }
     }
 
-    window.onload = redirect;
+    window.onload = detect;
   </script>
 </head>
 
-<body style="font-family: Arial; text-align:center; padding-top:80px;">
-  <h3>正在为您跳转下载页面，请稍候...</h3>
+<body>
+
+  <div class="box">
+    <h1>Alphamed Health</h1>
+    <p>Download the official app for health tracking & blood pressure management</p>
+
+    <!-- iOS -->
+    <a id="ios" class="btn ios hidden"
+       href="https://apps.apple.com/us/app/alphamed-health/id6758136792">
+      Download for iPhone / iPad
+    </a>
+
+    <!-- Google Play -->
+    <a id="google" class="btn google hidden"
+       href="https://play.google.com/store/search?q=alphamed+health&c=apps">
+      Get it on Google Play
+    </a>
+
+    <!-- APK -->
+    <a id="apk" class="btn apk hidden"
+       href="https://www.pgyer.com/alphamedhealth-android-5">
+      Download APK for Android / PC
+    </a>
+
+    <div class="small">
+      Secure download • Official sources only
+    </div>
+  </div>
+
 </body>
 </html>
